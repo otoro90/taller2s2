@@ -29,7 +29,10 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Container(
             child: Row(
               children: [
-                Text(resultadoOperaciones),
+                Text(
+                  resultadoOperaciones,
+                  textAlign: TextAlign.justify,
+                ),
               ],
             ),
           ),
@@ -44,129 +47,129 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         Container(
-            color: Colors.yellow,
             child: Column(children: [
-              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        operaciones += "7";
-                      });
-                    },
-                    child: Text("7")),
-                ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        operaciones += "8";
-                      });
-                    },
-                    child: Text("8")),
-                ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        operaciones += "9";
-                      });
-                    },
-                    child: Text("9")),
-                ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        operaciones += " / ";
-                      });
-                    },
-                    child: Text("/"))
-              ]),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        operaciones += "4";
-                      });
-                    },
-                    child: Text("4")),
-                ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        operaciones += "5";
-                      });
-                    },
-                    child: Text("5")),
-                ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        operaciones += "6";
-                      });
-                    },
-                    child: Text("6")),
-                ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        operaciones += " x ";
-                      });
-                    },
-                    child: Text("x"))
-              ]),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        operaciones += "1";
-                      });
-                    },
-                    child: Text("1")),
-                ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        operaciones += "2";
-                      });
-                    },
-                    child: Text("2")),
-                ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        operaciones += "3";
-                      });
-                    },
-                    child: Text("3")),
-                ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        operaciones += " - ";
-                      });
-                    },
-                    child: Text("-"))
-              ]),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        operaciones += "0";
-                      });
-                    },
-                    child: Text("0")),
-                ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        operaciones = "";
-                      });
-                    },
-                    child: Text("C")),
-                ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        getOperacion();
-                      });
-                    },
-                    child: Text("=")),
-                ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        operaciones += " + ";
-                      });
-                    },
-                    child: Text("+"))
-              ])
-            ])),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones += "7";
+                  });
+                },
+                child: Text("7")),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones += "8";
+                  });
+                },
+                child: Text("8")),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones += "9";
+                  });
+                },
+                child: Text("9")),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones += " / ";
+                  });
+                },
+                child: Text("/"))
+          ]),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones += "4";
+                  });
+                },
+                child: Text("4")),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones += "5";
+                  });
+                },
+                child: Text("5")),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones += "6";
+                  });
+                },
+                child: Text("6")),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones += " x ";
+                  });
+                },
+                child: Text("x"))
+          ]),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones += "1";
+                  });
+                },
+                child: Text("1")),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones += "2";
+                  });
+                },
+                child: Text("2")),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones += "3";
+                  });
+                },
+                child: Text("3")),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones += " - ";
+                  });
+                },
+                child: Text("-"))
+          ]),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones += "0";
+                  });
+                },
+                child: Text("0")),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones = "";
+                    resultadoOperaciones = "";
+                  });
+                },
+                child: Text("C")),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    getOperacion();
+                  });
+                },
+                child: Text("=")),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones += " + ";
+                  });
+                },
+                child: Text("+"))
+          ])
+        ])),
       ],
     );
   }
@@ -188,7 +191,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     ? (x / y)
                     : "Operación invalida";
 
-    resultadoOperaciones = "$resultado";
-    operaciones = "";
+    resultadoOperaciones =
+        "$resultadoOperaciones\n $x $operador $y = $resultado";
+    operaciones = "$resultado";
   }
 }
