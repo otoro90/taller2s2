@@ -192,7 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text("C")),
             ElevatedButton(
                 onPressed: () {
-                  getOperacion();
+                  getOperacion(operaciones);
                 },
                 child: Text("=")),
             ElevatedButton(
@@ -208,25 +208,27 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  getOperacion() {
+  getOperacion(String operacion) {
     try {
       num resultado;
 
-      if (!operaciones.contains(" ")) {
-        if (operaciones.contains(new RegExp(r'²|√|%'))) {
-          resultado = validarOperacionesEspeciales(operaciones);
+      if (!operacion.contains(" ")) {
+        if (operacion.contains(new RegExp(r'²|√|%'))) {
+          resultado = validarOperacionesEspeciales(operacion);
           setState(() {
-            operaciones = "$resultado";
+            operacion = "$resultado";
+            operaciones = operacion;
           });
         }
         setState(() {
-          resultadoOperaciones = operaciones;
+          operaciones = operacion;
+          resultadoOperaciones = operacion;
         });
       } else {
-        var array = operaciones.split(" ");
+        var array = operacion.split(" ");
         String operador = array[1].trim();
-        double x = validarOperacionesEspeciales(array[0].trim());
-        double y = validarOperacionesEspeciales(array[2].trim());
+        num x = validarOperacionesEspeciales(array[0].trim());
+        num y = validarOperacionesEspeciales(array[2].trim());
 
         resultado = (operador == "+")
             ? (x + y)
@@ -245,6 +247,13 @@ class _MyHomePageState extends State<MyHomePage> {
               "$resultadoOperaciones\n $x $operador $y = $resultado";
           operaciones = "$resultado";
         });
+
+        if (array.length > 3) {
+          array = array.sublist(3);
+          array.insert(0, resultado.toString());
+          operacion = array.join(" ");
+          getOperacion(operacion);
+        }
       }
     } catch (e) {
       setState(() {
