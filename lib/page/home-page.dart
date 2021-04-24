@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -48,6 +50,38 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         Container(
             child: Column(children: [
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones += "√";
+                  });
+                },
+                child: Text("√")),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones += "²";
+                  });
+                },
+                child: Text("x²")),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones += "%";
+                  });
+                },
+                child: Text("%")),
+            ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    operaciones = operaciones.isNotEmpty
+                        ? operaciones.substring(0, operaciones.length - 1)
+                        : "";
+                  });
+                },
+                child: Text("<"))
+          ]),
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             ElevatedButton(
                 onPressed: () {
@@ -174,33 +208,71 @@ class _MyHomePageState extends State<MyHomePage> {
 
   getOperacion() {
     try {
-      var array = operaciones.split(" ");
       num resultado;
-      String operador = array[1].trim();
-      double x = double.parse(array[0].trim());
-      double y = double.parse(array[2].trim());
 
-      resultado = (operador == "+")
-          ? (x + y)
-          : (operador == "-")
-              ? (x - y)
-              : (operador == "x")
-                  ? (x * y)
-                  : (operador == "/")
-                      ? (x / y)
-                      : "Operación invalida";
+      if (!operaciones.contains(" ")) {
+        if (operaciones.contains(new RegExp(r'²|√|%'))) {
+          resultado = validarOperacionesEspeciales(operaciones);
+          setState(() {
+            operaciones = "$resultado";
+          });
+        }
+        setState(() {
+          resultadoOperaciones = operaciones;
+        });
+      } else {
+        var array = operaciones.split(" ");
+        String operador = array[1].trim();
+        double x = validarOperacionesEspeciales(array[0].trim());
+        double y = validarOperacionesEspeciales(array[2].trim());
 
-      resultado = resultado % 1 == 0 ? resultado.round() : resultado;
+        resultado = (operador == "+")
+            ? (x + y)
+            : (operador == "-")
+                ? (x - y)
+                : (operador == "x")
+                    ? (x * y)
+                    : (operador == "/")
+                        ? (x / y)
+                        : "Operación invalida";
 
-      setState(() {
-        resultadoOperaciones =
-            "$resultadoOperaciones\n $x $operador $y = $resultado";
-        operaciones = "$resultado";
-      });
+        resultado = resultado % 1 == 0 ? resultado.round() : resultado;
+
+        setState(() {
+          resultadoOperaciones =
+              "$resultadoOperaciones\n $x $operador $y = $resultado";
+          operaciones = "$resultado";
+        });
+      }
     } catch (e) {
       setState(() {
         operaciones += "\nExpresión malformada";
       });
     }
+  }
+
+  num validarOperacionesEspeciales(String numeroCuadratico) {
+    num resultado;
+    if (numeroCuadratico.contains("²")) {
+      var numero = double.parse(numeroCuadratico.split("²")[0]);
+      resultado = numero * numero;
+      resultado = resultado % 1 == 0 ? resultado.round() : resultado;
+      return resultado;
+    }
+
+    if (numeroCuadratico.contains("√")) {
+      var numero = double.parse(numeroCuadratico.split("√")[0]);
+      resultado = sqrt(numero);
+      resultado = resultado % 1 == 0 ? resultado.round() : resultado;
+      return resultado;
+    }
+
+    if (numeroCuadratico.contains("%")) {
+      var numero = double.parse(numeroCuadratico.split("%")[0]);
+      resultado = numero / 100;
+      resultado = resultado % 1 == 0 ? resultado.round() : resultado;
+      return resultado;
+    }
+    return double.parse(numeroCuadratico);
   }
 }
