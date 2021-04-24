@@ -168,18 +168,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
   getOperacion() {
     var array = operaciones.split(" ");
-    if (array[1] == "+") {
-      operaciones =
-          (double.parse(array[0]) + double.parse(array[2])).toString();
-    } else if (array[1] == "-") {
-      operaciones =
-          (double.parse(array[0]) - double.parse(array[2])).toString();
-    } else if (array[1] == "x") {
-      operaciones =
-          (double.parse(array[0]) * double.parse(array[2])).toString();
-    } else if (array[1] == "/") {
-      operaciones =
-          (double.parse(array[0]) / double.parse(array[2])).toString();
-    }
+    String operador = array[1];
+    double x = double.parse(array[0]);
+    double y = double.parse(array[2]);
+
+    operaciones = (operador == "+")
+        ? (x + y).toString()
+        : (operador == "-")
+            ? (x - y).toString()
+            : (operador == "x")
+                ? (x * y).toString()
+                : (operador == "/")
+                    ? (x / y).toString()
+                    : "Operación invalida";
   }
 }
