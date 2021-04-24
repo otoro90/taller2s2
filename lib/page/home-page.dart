@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:taller1s2/page/resultados.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -212,7 +213,14 @@ class _MyHomePageState extends State<MyHomePage> {
           ]),
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             ElevatedButton(
-                onPressed: () {}, child: Text("Mostrar listado de resultados")),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ResultadosPage(
+                              listadoResultados: listaResultados)));
+                },
+                child: Text("Mostrar resultados de operaciones")),
           ])
         ])),
       ],
@@ -227,14 +235,17 @@ class _MyHomePageState extends State<MyHomePage> {
         if (operacion.contains(new RegExp(r'²|√|%'))) {
           resultado = validarOperacionesEspeciales(operacion);
           setState(() {
+            listaResultados.add(Text("$operacion = $resultado"));
             operacion = "$resultado";
             operaciones = operacion;
           });
+        } else {
+          setState(() {
+            listaResultados.add(Text("$operacion = $operacion"));
+            operaciones = operacion;
+            resultadoOperaciones = operacion;
+          });
         }
-        setState(() {
-          operaciones = operacion;
-          resultadoOperaciones = operacion;
-        });
       } else {
         var array = operacion.split(" ");
         String operador = array[1].trim();
