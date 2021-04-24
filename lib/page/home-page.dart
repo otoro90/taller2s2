@@ -10,6 +10,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String operaciones = "";
+  String resultadoOperaciones = "";
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,11 @@ class _MyHomePageState extends State<MyHomePage> {
       children: [
         Expanded(
           child: Container(
-            color: Colors.red,
+            child: Row(
+              children: [
+                Text(resultadoOperaciones),
+              ],
+            ),
           ),
         ),
         Container(
@@ -168,18 +173,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
   getOperacion() {
     var array = operaciones.split(" ");
-    String operador = array[1];
-    double x = double.parse(array[0]);
-    double y = double.parse(array[2]);
+    double resultado;
+    String operador = array[1].trim();
+    double x = double.parse(array[0].trim());
+    double y = double.parse(array[2].trim());
 
-    operaciones = (operador == "+")
-        ? (x + y).toString()
+    resultado = (operador == "+")
+        ? (x + y)
         : (operador == "-")
-            ? (x - y).toString()
+            ? (x - y)
             : (operador == "x")
-                ? (x * y).toString()
+                ? (x * y)
                 : (operador == "/")
-                    ? (x / y).toString()
+                    ? (x / y)
                     : "Operación invalida";
+
+    resultadoOperaciones = "$resultado";
+    operaciones = "";
   }
 }
