@@ -13,6 +13,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String operaciones = "";
   String resultadoOperaciones = "";
+  List<Text> listaResultados = [];
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +30,20 @@ class _MyHomePageState extends State<MyHomePage> {
       children: [
         Expanded(
           child: Container(
-            child: Row(
-              children: [
-                Text(
-                  resultadoOperaciones,
-                  textAlign: TextAlign.justify,
+              color: Colors.red,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: listaResultados,
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
+              )),
         ),
         Container(
           color: Colors.blue,
@@ -187,6 +193,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   setState(() {
                     operaciones = "";
                     resultadoOperaciones = "";
+                    listaResultados = [];
                   });
                 },
                 child: Text("C")),
@@ -202,6 +209,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   });
                 },
                 child: Text("+"))
+          ]),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+            ElevatedButton(
+                onPressed: () {}, child: Text("Mostrar listado de resultados")),
           ])
         ])),
       ],
@@ -245,6 +256,7 @@ class _MyHomePageState extends State<MyHomePage> {
         setState(() {
           resultadoOperaciones =
               "$resultadoOperaciones\n $x $operador $y = $resultado";
+          listaResultados.add(Text("$operacion = $resultado"));
           operaciones = "$resultado";
         });
 
