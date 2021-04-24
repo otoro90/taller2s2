@@ -156,9 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text("C")),
             ElevatedButton(
                 onPressed: () {
-                  setState(() {
-                    getOperacion();
-                  });
+                  getOperacion();
                 },
                 child: Text("=")),
             ElevatedButton(
@@ -176,7 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   getOperacion() {
     var array = operaciones.split(" ");
-    double resultado;
+    num resultado;
     String operador = array[1].trim();
     double x = double.parse(array[0].trim());
     double y = double.parse(array[2].trim());
@@ -191,8 +189,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     ? (x / y)
                     : "Operación invalida";
 
-    resultadoOperaciones =
-        "$resultadoOperaciones\n $x $operador $y = $resultado";
-    operaciones = "$resultado";
+    resultado = resultado % 1 == 0 ? resultado.round() : resultado;
+
+    setState(() {
+      resultadoOperaciones =
+          "$resultadoOperaciones\n $x $operador $y = $resultado";
+      operaciones = "$resultado";
+    });
   }
 }
