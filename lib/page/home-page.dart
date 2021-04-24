@@ -22,8 +22,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _body() {
     return Column(
       children: [
-        Container(
-          color: Colors.red,
+        Expanded(
+          child: Container(
+            color: Colors.red,
+          ),
         ),
         Container(
           color: Colors.blue,
