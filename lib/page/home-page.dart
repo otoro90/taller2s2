@@ -24,16 +24,21 @@ class _MyHomePageState extends State<MyHomePage> {
       children: [
         Container(
           color: Colors.red,
-          height: 100,
         ),
         Container(
           color: Colors.blue,
           height: 100,
         ),
         Container(
-          color: Colors.yellow,
-          height: 100,
-        ),
+            color: Colors.yellow,
+            child: Column(children: [
+              Row(children: [
+                ElevatedButton(onPressed: () {}, child: Text("0")),
+                ElevatedButton(onPressed: () {}, child: Text("C")),
+                ElevatedButton(onPressed: () {}, child: Text("=")),
+                ElevatedButton(onPressed: () {}, child: Text("+"))
+              ])
+            ])),
       ],
     );
   }
